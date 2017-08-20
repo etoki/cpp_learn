@@ -6,12 +6,14 @@
 #include <string.h>
 #include "File.h"
 
+const int TF_OVERFLOW = EOF - 1;  // オーバーフロー
+
 using namespace std;
 
 class CTextFile : public CFile{
 public:
     int WriteString(const char* pszString);  // 文字列を書き込む
-   int ReadLine(char* buffer, int nSize);   // １行読み出す関数
+    int ReadLine(char* buffer, size_t nSize);   // １行読み出す関数
 };
 
 // 文字列を書き込む
