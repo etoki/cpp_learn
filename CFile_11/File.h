@@ -18,6 +18,7 @@ private:
     // コンストラクタ・デストラクタ
 public:
     CFile();                     // コンストラクタ
+    //CFile(const char* pszPath, const char* pszFlags);
     CFile(const CFile& rother);  // コピーコンストラクタ
     ~CFile();                    // デストラクタ
 
@@ -28,7 +29,7 @@ public:
     void Close();  // ファイルを閉じる
 
 private:
-    bool ModifyFlags(const char* pszSource, char* pszDest, int nSize);
+    virtual bool ModifyFlags(const char* pszSource, char* pszDest, int nSize);
                    // フラグの調整
 
     // ファイルの操作

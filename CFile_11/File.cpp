@@ -1,4 +1,5 @@
 // File.cpp
+#include <iostream>
 #include <stdio.h>
 #include <string.h>
 #include "MainDefs.h"
@@ -8,8 +9,10 @@ using namespace std;
 
 // コンストラクタ
 CFile::CFile(){
+//CFile::CFile(const char* pszPath, const char* pszFlags){
     m_pfile = NULL;
     m_bCopy = false;
+//    Open(pszPath, pszFlags);
 }
 
 // コピーコンストラクタ
@@ -26,6 +29,8 @@ CFile::~CFile(){
 
 // ファイルを開く
 bool CFile::Open(const char* pszFile, const char* pszFlags){
+    cout << "CFile::Open" << endl;
+
     Close();
 
     char bufFlags[8];
@@ -46,6 +51,8 @@ void CFile::Close(){
 
 // フラグの調整
 bool CFile::ModifyFlags(const char* pszSource, char* pszDest, int nSize){
+    cout << "CFile::ModifyFlags" << endl;
+
     bool bBinary;  // 'b' の指定があるかどうか
 
     // strchr は、指定した文字が初めに出てくる位置を返す関数です

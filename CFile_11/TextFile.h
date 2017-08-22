@@ -14,6 +14,13 @@ class CTextFile : public CFile{
 public:
     int WriteString(const char* pszString);  // 文字列を書き込む
     int ReadLine(char* buffer, size_t nSize);   // １行読み出す関数
+
+//public:
+//    bool Open(const char* pszFile, const char* pszFlags);
+                   // ファイルを開く
+private:
+    virtual bool ModifyFlags(const char* pszSource, char* pszDest, int nSize);
+                   // フラグの調整
 };
 
 // 文字列を書き込む
