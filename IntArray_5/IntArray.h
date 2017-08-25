@@ -27,8 +27,8 @@ private:
     // コピー
 public:
     bool Copy(const CIntArray& rother);  // 配列のコピー
-    //void operator =(const CIntArray& rother); // = 演算子によるコピー
-    CIntArray& operator =(const CIntArray& rother); // 26章
+    void operator =(const CIntArray& rother); // = 演算子によるコピー
+//    CIntArray& operator =(const CIntArray& rother); // 26章
 
     // 諸関数
 private:

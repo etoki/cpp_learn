@@ -61,9 +61,10 @@ CIntArray::~CIntArray()
 }
 
 // = 演算子によるコピー
-CIntArray& CIntArray::operator =(const CIntArray& rother){
+//CIntArray& CIntArray::operator =(const CIntArray& rother){
+void CIntArray::operator =(const CIntArray& rother){
     Copy(rother);
-    return *this;
+//    return *this;
 }
 
 // 配列のコピー
