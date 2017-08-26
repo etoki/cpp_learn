@@ -31,6 +31,8 @@ int main()
     int a;
     int* p;
     int& r = a;
+    // int& r; &r = a; とはやらない
+
 
     // printf("%d\n", a); //value
     // printf("%d\n", &a); //address
@@ -38,7 +40,7 @@ int main()
     // printf("%d\n", r); //value same as a value
     // printf("%d\n\n", &r); //address same as a address
     //
-    // p = &a;
+    // p = &a; //同じアドレス＝エイリアス
     // printf("%d\n", p); //address same as a address
     // printf("%d\n\n", *p); //value same as a value
     //

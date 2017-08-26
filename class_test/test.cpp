@@ -18,6 +18,7 @@ public:          //アクセス指定子
 
     //インライン関数の宣言
     virtual void Disp(int m_a);
+    //virtual オーバーライドできるようにする
 };
 
 //thisによるアドレス取得25章
