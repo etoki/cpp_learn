@@ -5,6 +5,8 @@
 // $ ./a.out '/home/k/OpenCLimage/tstImg/Parrots.bmp' a.bmp Release/lap4.cl
 // ビットマップサイズ= 256 x 256, 24/pixel
 //
+//./a.out '../../Koala.bmp' a.bmp lap4.cl
+//
 // (c)Copyright Spacesoft corp., 2012 All rights reserved.
 //                               Hiro KITAYAMA
 //===================================================================
