@@ -1,5 +1,5 @@
-﻿// g++ add.cpp src/ClUtils.cpp -lOpenCL
-// ./a.out kernel/add.cl
+﻿// g++ work.cpp src/ClUtils.cpp -lOpenCL
+// ./a.out kernel/work.cl
 
 #ifdef __APPLE__
 #include <OpenCL/opencl.h>
@@ -13,14 +13,15 @@
 
 #define MAX_SRC_SIZE (0x100000)
 static const int CL_SOURCE_SIZE=10000;
-static const char *clProc = "add"; //カーネル関数の名前
+static const char *clProc = "clCode";
 
 //-------------------------------------------------------------------
 // main
 int
 main(int argc, char* argv[])
 {
-    float A=1.1f, B=2.2f, C;
+//    int a[100];
+    int a[100][4];
 
     cl_int status;
 
@@ -36,30 +37,29 @@ main(int argc, char* argv[])
     cl_command_queue queue = clUtils.getCmdQueue();
 
     //5, create memory object
-    cl_mem memA=clUtils.createInBuffer(sizeof(A), &A);
-    cl_mem memB=clUtils.createInBuffer(sizeof(B), &B);
-    cl_mem memC=clUtils.createOutBuffer(sizeof(C));
+    cl_mem memA=clUtils.createOutBufferRW(sizeof(a));
 
     //8, create kernel: カーネル関数の名前
     cl_kernel kernel=clUtils.createKernel(clProc);
 
     //9, set kernel parameters
     status = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void *)&memA);
-    status+= clSetKernelArg(kernel, 1, sizeof(cl_mem), (void *)&memB);
-    status+= clSetKernelArg(kernel, 2, sizeof(cl_mem), (void *)&memC);
+
+    size_t globalSize[] = {100};
+    size_t localSize[]  = {20};
 
     //10, request execute kernel: input command queue
-    status=clEnqueueTask(queue, kernel, 0, NULL, NULL);
+    status=clEnqueueNDRangeKernel(queue, kernel, 1, NULL, globalSize, localSize, 0, NULL, NULL);
 
     //11, obtain results
-    clUtils.enqueueReadBuffer(memC, sizeof(C), &C);
+    clUtils.enqueueReadBuffer(memA, sizeof(a), &a);
 
     // list results
-    printf("%f + %f = %f\n", A, B, C);
+    for(int i=0; i<sizeof(a)/sizeof(a[0]); i++)
+//       printf("a[%2d]=%3d\n", i, a[i]);
+       printf("global id = %2d, group id = %2d, local id = %2d\n", a[i][0], a[i][2], a[i][3]);
 
     //12, release resources
-    clReleaseMemObject(memC);
-    clReleaseMemObject(memB);
     clReleaseMemObject(memA);
 
     return 0;

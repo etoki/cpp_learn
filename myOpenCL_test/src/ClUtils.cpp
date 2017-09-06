@@ -229,13 +229,28 @@ ClUtils::createInBuffer(const size_t memSize, void *pMem)
 }
 
 //-------------------------------------------------------------------
-// create memory object(out)
+// create memory object(out) CL_MEM_WRITE_ONLY
 cl_mem
 ClUtils::createOutBuffer(const size_t memSize)
 {
     cl_int status;
 
     cl_mem mem=clCreateBuffer(mContext, CL_MEM_WRITE_ONLY,
+                                    memSize, NULL,  &status);
+    if(status!=CL_SUCCESS)
+        throw Cexp("clCreateBuffer failed.");
+
+    return mem;
+}
+
+//-------------------------------------------------------------------
+// create memory object(out) CL_MEM_READ_WRITE
+cl_mem
+ClUtils::createOutBufferRW(const size_t memSize)
+{
+    cl_int status;
+
+    cl_mem mem=clCreateBuffer(mContext, CL_MEM_READ_WRITE,
                                     memSize, NULL,  &status);
     if(status!=CL_SUCCESS)
         throw Cexp("clCreateBuffer failed.");

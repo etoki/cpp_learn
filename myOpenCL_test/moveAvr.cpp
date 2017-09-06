@@ -1,5 +1,5 @@
 ﻿// g++ moveAvr.cpp ClUtils.cpp -lOpenCL
-// ./a.out 1 moveAvr.cl
+// ./a.out 1 kernel/moveAvr.cl
 #ifdef __APPLE__
 #include <OpenCL/opencl.h>
 #else
@@ -9,16 +9,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include "Cexp.h"
-#include "ClUtils.h"
+#include "src/Cexp.h"
+#include "src/ClUtils.h"
 
 #define MAX_SRC_SIZE (0x100000)
 static const int CL_SOURCE_SIZE=10000;
 static const char *clProc = "lowPass"; //カーネル関数の名前
 
 static const float wav[]={
-//#include "data.txt"
-#include "task.txt"
+//#include "src/data.txt"
+#include "src/task.txt"
 };
 
 //-------------------------------------------------------------------

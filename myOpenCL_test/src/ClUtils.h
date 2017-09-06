@@ -25,6 +25,7 @@ public:
     cl_kernel        createAddtionalKernel(const char *proc);
     cl_mem           createInBuffer(const size_t memSize, void *pMem);
     cl_mem           createOutBuffer(const size_t memSize);
+    cl_mem           createOutBufferRW(const size_t memSize);
     cl_mem           createOutBuffer(const size_t memSize, unsigned char fill);
     void             enqueueReadBuffer(cl_mem mem,const size_t memSize, void *pMem);
 
