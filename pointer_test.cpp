@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdio.h>
 
 using namespace std;
 
@@ -12,27 +11,15 @@ struct test_const{ // 構造体
     int  point;
 };
 
-class test_class{ // 構造体
-public:
-    int  no;
-    int  point;
-};
-
 void ConstDisp(const   test_const& test);
 void pConstDisp(const  test_const* ptest);
 void p2ConstDisp(const test_const* ptest);
-
-void ClassDisp(const   test_class& test);
-void pClassDisp(const  test_class* ptest);
-void p2ClasstDisp(const test_class* ptest);
 
 int main()
 {
     int a;
     int* p;
     int& r = a;
-    // int& r; &r = a; とはやらない
-
 
     // printf("%d\n", a); //value
     // printf("%d\n", &a); //address
@@ -40,7 +27,7 @@ int main()
     // printf("%d\n", r); //value same as a value
     // printf("%d\n\n", &r); //address same as a address
     //
-    // p = &a; //同じアドレス＝エイリアス
+    // p = &a;
     // printf("%d\n", p); //address same as a address
     // printf("%d\n\n", *p); //value same as a value
     //
@@ -63,25 +50,17 @@ int main()
         { 2, 20, },
         { 3, 30, },
     };
-
-    test_class testc[] = {
-        { 1, 10, },
-        { 2, 20, },
-        { 3, 30, },
-    };
-
     // ConstDisp(test[0]);
     // pConstDisp(&test[1]);
-    ClassDisp(testc[0]);
     // p2ConstDisp(&test[2]);
 
-    // printf("No: %d point: %d\n", test[0].no, test[0].point);
+    printf("No: %d point: %d\n", test[0].no, test[0].point);
 
     return 0;
 }
 
-void f(int  x){  cout << "result: " << x << endl; }
-void fp(int *p){ cout << "p_result: " << *p << endl; }
+void f(int  x){  printf("result: %d\n",    x); }
+void fp(int *p){ printf("p_result: %d\n", *p); }
 
 void ConstDisp(const test_const &test){
   cout << "No: "    << test.no << ", "
@@ -94,22 +73,6 @@ void pConstDisp(const test_const *ptest){
 }
 
 void p2ConstDisp(const test_const *ptest){
-  cout << "p2 No: " << ptest->no << ", "
-       << "Point: " << ptest->point << endl;
-}
-
-// class
-void ClassDisp(const test_class &test){
-  cout << "No: "    << test.no << ", "
-       << "Point: " << test.point << endl;
-}
-
-void pClassDisp(const test_class *ptest){
-  cout << "p1 No: " << (*ptest).no << ", "
-       << "Point: " << (*ptest).point << endl;
-}
-
-void p2ClassDisp(const test_class *ptest){
   cout << "p2 No: " << ptest->no << ", "
        << "Point: " << ptest->point << endl;
 }
